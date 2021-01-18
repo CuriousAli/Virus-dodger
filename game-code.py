@@ -9,11 +9,11 @@ pygame.init()
 
 
 #setup of window
-FPS = 60
 SIZE = 1000, 800
 TITLE = "Dodge the virus"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
+
 
 
 RED = (255, 0, 0)
@@ -40,7 +40,7 @@ class Escape:
 class Virus:
     def __init__(self, start_coord = None, rad = 15,color = RED):
         if start_coord == None:
-            start_coord = [randint(200,970), randint(30, 770)
+            start_coord = [randint(200,970), randint(30, 770)]
 
         self.start_coord = start_coord
         self.rad = rad
@@ -51,6 +51,9 @@ class Virus:
         Draw virus
         '''
         pygame.draw.circle(screen, self.color, start_coord, self.rad)
+
+    def move(self):
+        pass
 
 
 class MovingVirus(Virus):
@@ -109,13 +112,13 @@ class Dodger:
 
 
 class Gameplay:
-    def __init__(self, N = 1, game = 0):
+    def __init__(self, N = randint(8, 15), game = 0):
         self.N = N
         self.addvirus()
         self.game = game
 
 
-    def addvirus(self, N, screen):
+    def addvirus(self):
         '''
         Add new elem of virus on game field
         '''
@@ -137,14 +140,11 @@ class Gameplay:
 
 clock = pygame.time.Clock()
 
-gpl = Gameplay(randint(8, 15))
 
 while game == 0:
-    clock.tick(15)
-    screen.fill(D_BLUE)
 
-    pg.display.flip()
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            pygame.quit()
 
-
-pg.quit()
-
+    pygame.display.flip()
