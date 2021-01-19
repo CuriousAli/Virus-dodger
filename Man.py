@@ -1,62 +1,47 @@
-import pygame
-import math
+import pygame as pg
 from random import randint
+import sys
 
 
-pygame.init()
+pg.init()
 
 
-#setup of window
 SIZE = 800, 600
+n = randint(1,15)
+
+def rand_color():
+    return (randint(0,255),randint(0,255),randint(0,255))
+
+
+class Man:
+    def __init__(self, color, x, y, rad = randint(10,20)):
+        x, y = randint(rad, 800 - rad), randint(rad, 600 - rad)
+        color = rand_color()
+        self.x = x
+        self.y = y
+        self.color = color
+        self.rad = rad
+
+    def draw(self, screen):
+        pg.draw.circle(screen, self.rad, (self.x, self.y), self.rad)
+
+
 TITLE = "Test circle"
-screen = pygame.display.set_mode(SIZE)
-pygame.display.set_caption(TITLE)
+screen = pg.display.set_mode(SIZE)
+pg.display.set_caption(TITLE)
+
+pg.display.flip()
+clock = pg.time.Clock()
 
 
-def control():
-    '''
-    Technical realisation  conrols of "Dodger" from keyboard by pressing "arrows"
-    '''
+game = True
 
-    pkgp = pygame.key.get_pressed()
-    u = pkgp[pygame.K_UP]
-    d = pkgp[pygame.K_DOWN]
-    l = pkgp[pygame.K_LEFT]
-    r = pkgp[pygame.K_RIGHT]
+while game:
 
-    if u == True and man_y >= 14:
-        man_y -= 4
-    elif d == True and self.man_y <= 786:
-        man_y += 4
-    elif l == True and man_x >= 14:
-        man_x -= 4
-    elif r == True and man_x <= 986:
-        man_x += 4
 
-def draw():
-    pygame.draw.circle(screen, (60,255,255),(man_x, man_y), 10)
+    for i in pg.event.get():
+        if i.type == pg.quit():
+            game = False
 
 
 
-
-
-
-refresh_rate = 0
-
-pygame.display.flip()
-clock = pygame.time.Clock()
-
-
-man_x = randint(100,700)
-man_y = randint(100, 500)
-
-draw()
-
-while 1:
-
-    for i in pygame.event.get():
-        if i.type == pygame.QUIT:
-            pygame.quit()
-
-    clock.tick(10)
-    pygame.display.update()
