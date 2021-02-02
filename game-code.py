@@ -1,4 +1,4 @@
-# libraries for game
+"""# libraries for game
 import pygame
 import math
 from random import randint, choice
@@ -147,4 +147,4 @@ while game == 0:
         if i.type == pygame.QUIT:
             pygame.quit()
 
-    pygame.display.flip()
+    pygame.display.flip()"""
